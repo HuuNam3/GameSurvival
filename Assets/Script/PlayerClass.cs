@@ -2,10 +2,11 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerClass : MonoBehaviour
 {
-    public float speed = 4f;
     public GameObject btnOver;
+    public int attack = 5;
+    public float speed = 4f;
     private bool isGameOver = false;
     public float minX = -17f;
     public float maxX = 17f;
@@ -65,4 +66,8 @@ public class PlayerMovement : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
+    public int getAttack()
+    {
+        return this.attack;
+    }
 }

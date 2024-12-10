@@ -60,9 +60,12 @@ public class RandomSpawnerEnemy : MonoBehaviour
         } else if(enemies.Count < 10)
         {
             enemyScript.EnemyLevel(2);
-        } else
+        } else if (enemies.Count < 13)
         {
             enemyScript.EnemyLevel(3);
+        } else
+        {
+            enemyScript.EnemyLevel(4);
             CancelInvoke("SpawnObject");
         }
     }

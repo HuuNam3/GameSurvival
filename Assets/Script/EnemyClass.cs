@@ -10,6 +10,7 @@ public class EnemyClass : MonoBehaviour
     private float hp;           // HP c?a enemy
     private float armor;
     private float moveSpeed;
+    private float goldDrop;
     private string enemyName; // Tên c?a enemy
 
     private float minX = -17f;       // Gi?i h?n t?a ?? X
@@ -18,7 +19,7 @@ public class EnemyClass : MonoBehaviour
     private float maxY = 11f;
     private Vector3 targetPosition; // V? trí m?c tiêu
     private float chaseDuration = 10f;  // Th?i gian ?u?i theo Player
-    private float cooldownDuration = 5f; // Th?i gian ch? tr??c khi ?u?i l?i
+    private float cooldownDuration = 3f; // Th?i gian ch? tr??c khi ?u?i l?i
     private float chaseTimer = 0f;       // B? ??m th?i gian ?u?i theo
     private float cooldownTimer = 0f;    // B? ??m th?i gian ch?
     private bool isChasing = false;      // Tr?ng thái ?u?i theo Player
@@ -98,6 +99,7 @@ public class EnemyClass : MonoBehaviour
 
         if (hp <= 0)
         {
+            getGold();
             Die();
         }
     }
@@ -118,6 +120,7 @@ public class EnemyClass : MonoBehaviour
             this.info.color = Color.blue;
             this.moveSpeed = 3f;
             this.detectionRange = 9f;
+            this.goldDrop = 1;
         }
         else if (level == 2)
         {
@@ -127,6 +130,7 @@ public class EnemyClass : MonoBehaviour
             this.info.color = Color.green;
             this.moveSpeed = 2.5f;
             this.detectionRange = 9f;
+            this.goldDrop = 2;
         }
         else if (level == 3)
         {
@@ -136,6 +140,17 @@ public class EnemyClass : MonoBehaviour
             this.moveSpeed = 3.5f;
             this.info.color = Color.red;
             this.detectionRange = 12f;
+            this.goldDrop = 5;
+        }
+        else if (level == 4)
+        {
+            this.enemyName = "Super Boss";
+            this.hp = 100;
+            this.armor = 5;
+            this.moveSpeed = 4f;
+            this.info.color = Color.red;
+            this.detectionRange = 15f;
+            this.goldDrop = 20;
         }
     }
 
@@ -164,5 +179,12 @@ public class EnemyClass : MonoBehaviour
         float randomX = Random.Range(minX, maxX);
         float randomY = Random.Range(minY, maxY);
         targetPosition = new Vector3(randomX, randomY, transform.position.z); // ??m b?o Z không thay ??i
+    }
+
+    private void getGold()
+    {
+        float gold = PlayerPrefs.GetFloat("Gold",0);
+        gold += this.goldDrop;
+        PlayerPrefs.SetFloat("Gold", gold);
     }
 }
