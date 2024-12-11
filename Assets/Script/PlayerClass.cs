@@ -5,13 +5,14 @@ using UnityEngine.UI;
 public class PlayerClass : MonoBehaviour
 {
     public GameObject btnOver;
-    public int attack = 5;
-    public float speed = 4f;
+
+    private int attack = 5;
+    private float speed = 4f;
     private bool isGameOver = false;
-    public float minX = -17f;
-    public float maxX = 17f;
-    public float minY = -11f;
-    public float maxY = 11f;
+    private float minX = -17f;
+    private float maxX = 17f;
+    private float minY = -11f;
+    private float maxY = 11f;
 
     void Update()
     {
