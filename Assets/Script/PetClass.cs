@@ -7,7 +7,7 @@ public class PetClass : MonoBehaviour
     [SerializeField] private float area = 4f; // Bán kính khu vực di chuyển
     [SerializeField] private int attack = 5;
     [SerializeField] private TextMeshPro UIname;
-    [SerializeField] private string name = "Dog";
+    [SerializeField] private string namePet = "Dog";
     [SerializeField] private float moveSpeed = 4f; // Tốc độ di chuyển
     [SerializeField] private float returnThreshold = 7f; // Khoảng cách để quay về player
     [SerializeField] private string enemyTag = "Enemy"; // Tag của đối tượng Enemy
@@ -78,7 +78,7 @@ public class PetClass : MonoBehaviour
 
     private void init()
     {
-        this.UIname.text = this.name;
+        this.UIname.text = this.namePet;
     }
 
     void SetRandomTarget()

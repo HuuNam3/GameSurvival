@@ -9,17 +9,18 @@ public class RandomSpawnerEnemy : MonoBehaviour
     public Transform player;
     public List<GameObject> enemies;
 
-    private float minX = -17f;     // Giới hạn tọa độ X
-    private float maxX = 17f;      // Giới hạn tọa độ X
-    private float minY = -11f;     // Giới hạn tọa độ Y
-    private float maxY = 11f;        // Tọa độ y lớn nhất
+    private float minX = -50f;     // Giới hạn tọa độ X
+    private float maxX = 50f;      // Giới hạn tọa độ X
+    private float minY = -50f;     // Giới hạn tọa độ Y
+    private float maxY = 50f;        // Tọa độ y lớn nhất
     private int enemyCount = 0;
     private float minDistanceFromPlayer = 3f;
 
     void Start()
     {
         enemies = new List<GameObject>();
-        InvokeRepeating("SpawnObject", 0f, 6f);
+        //InvokeRepeating("SpawnObject", 0f, 6f);
+        SpawnObject();
     }
 
     void SpawnObject()
@@ -27,8 +28,6 @@ public class RandomSpawnerEnemy : MonoBehaviour
         // Tạo vị trí ngẫu nhiên trong phạm vi đã xác định
         enemyCount += 1;
         enemyText.text = "Enemy: " + enemyCount.ToString();
-
-
 
         float randomX = Random.Range(minX, maxX);
         float randomY = Random.Range(minY, maxY);
@@ -54,19 +53,19 @@ public class RandomSpawnerEnemy : MonoBehaviour
         EnemyClass enemyScript = enemy.GetComponent<EnemyClass>();
         enemies.Add(enemy);
 
-        if (enemies.Count < 5 )
-        {
-            enemyScript.EnemyLevel(1);
-        } else if(enemies.Count < 10)
-        {
-            enemyScript.EnemyLevel(2);
-        } else if (enemies.Count < 13)
-        {
-            enemyScript.EnemyLevel(3);
-        } else
-        {
-            enemyScript.EnemyLevel(4);
-            CancelInvoke("SpawnObject");
-        }
+        //if (enemies.Count < 5 )
+        //{
+        //    enemyScript.EnemyLevel(1);
+        //} else if(enemies.Count < 10)
+        //{
+        //    enemyScript.EnemyLevel(2);
+        //} else if (enemies.Count < 13)
+        //{
+        //    enemyScript.EnemyLevel(3);
+        //} else
+        //{
+        //    enemyScript.EnemyLevel(4);
+        //    CancelInvoke("SpawnObject");
+        //}
     }
 }

@@ -7,29 +7,46 @@ public class PlayerClass : MonoBehaviour
     public GameObject btnOver;
 
     private int attack = 5;
-    private float speed = 4f;
+    [SerializeField] private float speed = 3f;
     private bool isGameOver = false;
-    private float minX = -17f;
-    private float maxX = 17f;
-    private float minY = -11f;
-    private float maxY = 11f;
+    private Animator animator;
 
-    void Update()
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+    private void Update()
     {
         if (isGameOver)
             return;
-        // Lấy input từ bàn phím
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
 
-        // Tính toán vị trí mới
-        Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0) * speed * Time.deltaTime;
+        Vector2 dir = Vector2.zero;
+        if (Input.GetKey(KeyCode.A))
+        {
+            dir.x = -1;
+            animator.SetInteger("Direction", 3);
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            dir.x = 1;
+            animator.SetInteger("Direction", 2);
+        }
 
-        Vector3 newPosition = transform.position + movement;
-        // Giới hạn bản đồ
-        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
-        newPosition.y = Mathf.Clamp(newPosition.y, minY, maxY);
-        transform.position = newPosition;
+        if (Input.GetKey(KeyCode.W))
+        {
+            dir.y = 1;
+            animator.SetInteger("Direction", 1);
+        }
+        else if (Input.GetKey(KeyCode.S))
+        {
+            dir.y = -1;
+            animator.SetInteger("Direction", 0);
+        }
+
+        dir.Normalize();
+        animator.SetBool("IsMoving", dir.magnitude > 0);
+
+        GetComponent<Rigidbody2D>().velocity = speed * dir;
     }
 
     void OnTriggerEnter2D(Collider2D other) // Thay thế Collider bằng Collider2D
